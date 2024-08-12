@@ -10,7 +10,7 @@ public class CoinGeckoApiService implements ICoinGeckoApiService {
 
     @Override
     public void findCoinById(final String coinName) throws IOException, InterruptedException {
-        System.out.println("Coin Price".concat(coinName));
+        System.out.println("Carregando o preço da moeda ".concat(coinName).concat("..."));
 
         final var endereco = new StringBuilder()
                 .append("https://api.coingecko.com/api/v3/simple/price")
