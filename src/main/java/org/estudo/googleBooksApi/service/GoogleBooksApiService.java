@@ -5,13 +5,12 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Scanner;
 
 public class GoogleBooksApiService implements IGoogleBooksApiService {
 
     @Override
     public void findBookByName(String name) throws IOException, InterruptedException {
-        System.out.println("Consumo de Livros");
+        System.out.println("Carregando livro...");
 
         final var endereco = new StringBuilder()
                 .append("https://www.googleapis.com/books/v1/volumes")
