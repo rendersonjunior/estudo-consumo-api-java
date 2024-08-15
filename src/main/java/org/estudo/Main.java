@@ -32,7 +32,7 @@ public class Main {
                 case "1":
                     System.out.println("Escreva o nome do livro:\t");
                     final var nomeLivro = scanner.nextLine();
-                    googleBooksApiService.findBookByName(nomeLivro);
+                    System.out.println(googleBooksApiService.findBookByName(nomeLivro).toString());
                     break;
                 case "2":
                     System.out.println("Escreva o id da coin:\t (conforme /coins/list da documentacao)");

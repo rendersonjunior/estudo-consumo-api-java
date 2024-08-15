@@ -1,9 +1,11 @@
 package org.estudo.googleBooksApi.service;
 
+import org.estudo.googleBooksApi.model.GoogleBook;
+
 import java.io.IOException;
 
 public interface IGoogleBooksApiService {
 
-    void findBookByName(final String name) throws IOException, InterruptedException;
+    GoogleBook findBookByName(final String name) throws IOException, InterruptedException;
 
 }
