@@ -35,9 +35,11 @@ public class Main {
                     System.out.println(googleBooksApiService.findBookByName(nomeLivro).toString());
                     break;
                 case "2":
+                    coinGeckoApiService.findAllCoins();
+                    System.out.println("---------------");
                     System.out.println("Escreva o id da coin:\t (conforme /coins/list da documentacao)");
                     final var idMoeda = scanner.nextLine();
-                    coinGeckoApiService.findCoinById(idMoeda);
+                    System.out.println(coinGeckoApiService.findCoinById(idMoeda).toString());
                     break;
                 case "3":
                     System.out.println("Escreva o nome da receita:\t");

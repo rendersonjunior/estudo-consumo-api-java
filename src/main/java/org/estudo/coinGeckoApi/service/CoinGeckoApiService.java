@@ -1,5 +1,8 @@
 package org.estudo.coinGeckoApi.service;
 
+import com.google.gson.Gson;
+import org.estudo.coinGeckoApi.model.CoinGecko;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -8,25 +11,46 @@ import java.net.http.HttpResponse;
 
 public class CoinGeckoApiService implements ICoinGeckoApiService {
 
+    final HttpClient client = HttpClient.newHttpClient();
+    final Gson gson = new Gson();
+
     @Override
-    public void findCoinById(final String coinName) throws IOException, InterruptedException {
+    public void findAllCoins() throws IOException, InterruptedException {
+        System.out.println("Carregando a listagem de moedas...");
+
+        final var coinsList = new StringBuilder()
+                .append("https://api.coingecko.com/api/v3/coins/list");
+
+        final var requestList = HttpRequest.newBuilder()
+                .uri(URI.create(coinsList.toString()))
+                .build();
+
+        final HttpResponse<String> responseList = client.send(requestList,
+                HttpResponse.BodyHandlers.ofString());
+
+        System.out.println("-------------------");
+        System.out.println(responseList.body());
+    }
+
+    @Override
+    public CoinGecko findCoinById(final String coinName) throws IOException, InterruptedException {
         System.out.println("Carregando o preço da moeda ".concat(coinName).concat("..."));
 
-        final var endereco = new StringBuilder()
+        final var coinsPrice = new StringBuilder()
                 .append("https://api.coingecko.com/api/v3/simple/price")
                 .append("?ids=")
                 .append(coinName)
                 .append("&vs_currencies=usd");
 
-        final HttpClient client = HttpClient.newHttpClient();
-        final HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(endereco.toString()))
+        final var requestPrice = HttpRequest.newBuilder()
+                .uri(URI.create(coinsPrice.toString()))
                 .build();
 
-        final HttpResponse<String> response = client.send(request,
+        final HttpResponse<String> responsePrice = client.send(requestPrice,
                 HttpResponse.BodyHandlers.ofString());
 
-        System.out.println(response.body());
+        System.out.println(responsePrice.body());
+        return gson.fromJson(responsePrice.body(), CoinGecko.class);
     }
 
 }
