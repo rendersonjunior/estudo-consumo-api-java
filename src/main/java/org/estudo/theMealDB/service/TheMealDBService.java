@@ -1,5 +1,8 @@
 package org.estudo.theMealDB.service;
 
+import com.google.gson.Gson;
+import org.estudo.theMealDB.model.TheMealDB;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -8,8 +11,10 @@ import java.net.http.HttpResponse;
 
 public class TheMealDBService implements ITheMealDBService {
 
+    final Gson gson = new Gson();
+
     @Override
-    public void findRecipeByName(final String name) throws IOException, InterruptedException {
+    public TheMealDB findRecipeByName(final String name) throws IOException, InterruptedException {
         System.out.println("Carregando Receitas...");
 
         final var endereco = new StringBuilder()
@@ -23,8 +28,7 @@ public class TheMealDBService implements ITheMealDBService {
                 .build();
 
         final HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        System.out.println(response.body());
+        return gson.fromJson(response.body(), TheMealDB.class);
     }
 
 }

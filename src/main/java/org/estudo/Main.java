@@ -20,6 +20,7 @@ public class Main {
         final var scanner = new Scanner(System.in);
         var opcao = "";
         do {
+            System.out.println("### --------------------- ###");
             System.out.println("Selecione o tipo de servico api que deseja consumir: ");
             System.out.println("1 - Google Books");
             System.out.println("2 - Coin Gecko");
@@ -44,7 +45,7 @@ public class Main {
                 case "3":
                     System.out.println("Escreva o nome da receita:\t");
                     final var nomeReceita = scanner.nextLine();
-                    theMealDBService.findRecipeByName(nomeReceita);
+                    System.out.println(theMealDBService.findRecipeByName(nomeReceita));
                     break;
                 case "0":
                     System.out.println("Encerrando aplicação...");
