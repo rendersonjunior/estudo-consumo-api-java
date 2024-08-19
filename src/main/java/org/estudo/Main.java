@@ -16,7 +16,7 @@ public class Main {
     final static ICoinGeckoApiService coinGeckoApiService = new CoinGeckoApiService();
     final static ITheMealDBService theMealDBService = new TheMealDBService();
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) {
         final var scanner = new Scanner(System.in);
         var opcao = "";
         do {
@@ -29,32 +29,37 @@ public class Main {
             System.out.println("-----");
             opcao = scanner.nextLine();
 
-            switch (opcao) {
-                case "1":
-                    System.out.println("Escreva o nome do livro:\t");
-                    final var nomeLivro = scanner.nextLine();
-                    System.out.println(googleBooksApiService.findBookByName(nomeLivro).toString());
-                    break;
-                case "2":
-                    coinGeckoApiService.findAllCoins();
-                    System.out.println("---------------");
-                    System.out.println("Escreva o id da coin:\t (conforme /coins/list da documentacao)");
-                    final var idMoeda = scanner.nextLine();
-                    System.out.println(coinGeckoApiService.findCoinById(idMoeda).toString());
-                    break;
-                case "3":
-                    System.out.println("Escreva o nome da receita:\t");
-                    final var nomeReceita = scanner.nextLine();
-                    System.out.println(theMealDBService.findRecipeByName(nomeReceita));
-                    break;
-                case "0":
-                    System.out.println("Encerrando aplicação...");
-                    break;
-                default:
-                    System.out.println("Opção inválida!");
-                    break;
+            try {
+                switch (opcao) {
+                    case "1":
+                        System.out.println("Escreva o nome do livro:\t");
+                        final var nomeLivro = scanner.nextLine();
+                        System.out.println(googleBooksApiService.findBookByName(nomeLivro).toString());
+                        break;
+                    case "2":
+                        coinGeckoApiService.findAllCoins();
+                        System.out.println("---------------");
+                        System.out.println("Escreva o id da coin:\t (conforme /coins/list da documentacao)");
+                        final var idMoeda = scanner.nextLine();
+                        System.out.println(coinGeckoApiService.findCoinById(idMoeda).toString());
+                        break;
+                    case "3":
+                        System.out.println("Escreva o nome da receita:\t");
+                        final var nomeReceita = scanner.nextLine();
+                        System.out.println(theMealDBService.findRecipeByName(nomeReceita));
+                        break;
+                    case "0":
+                        System.out.println("Encerrando aplicação...");
+                        break;
+                    default:
+                        System.out.println("Opção inválida!");
+                        break;
+                }
+            } catch (IOException | InterruptedException ex) {
+                System.out.println("Erro: ".concat(ex.getMessage()));
             }
         } while (!"0".equals(opcao));
+
     }
 
 }
