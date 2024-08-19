@@ -3,6 +3,8 @@ package org.estudo;
 
 import org.estudo.coinGeckoApi.service.CoinGeckoApiService;
 import org.estudo.coinGeckoApi.service.ICoinGeckoApiService;
+import org.estudo.gitHubApi.service.GitHubService;
+import org.estudo.gitHubApi.service.IGitHubService;
 import org.estudo.googleBooksApi.service.GoogleBooksApiService;
 import org.estudo.googleBooksApi.service.IGoogleBooksApiService;
 import org.estudo.theMealDB.service.ITheMealDBService;
@@ -15,6 +17,7 @@ public class Main {
     final static IGoogleBooksApiService googleBooksApiService = new GoogleBooksApiService();
     final static ICoinGeckoApiService coinGeckoApiService = new CoinGeckoApiService();
     final static ITheMealDBService theMealDBService = new TheMealDBService();
+    final static IGitHubService gitHubService = new GitHubService();
 
     public static void main(String[] args) {
         final var scanner = new Scanner(System.in);
@@ -25,6 +28,7 @@ public class Main {
             System.out.println("1 - Google Books");
             System.out.println("2 - Coin Gecko");
             System.out.println("3 - The MealDB");
+            System.out.println("4 - GitHub");
             System.out.println("0 - Sair");
             System.out.println("-----");
             opcao = scanner.nextLine();
@@ -47,6 +51,11 @@ public class Main {
                         System.out.println("Escreva o nome da receita:\t");
                         final var nomeReceita = scanner.nextLine();
                         System.out.println(theMealDBService.findRecipeByName(nomeReceita));
+                        break;
+                    case "4":
+                        System.out.println("Escreva o nome do usuário do github:\t");
+                        final var nomeUsuario = scanner.nextLine();
+                        gitHubService.findUserByName(nomeUsuario);
                         break;
                     case "0":
                         System.out.println("Encerrando aplicação...");
