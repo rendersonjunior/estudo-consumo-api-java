@@ -1,9 +1,11 @@
 package org.estudo.gitHubApi.service;
 
+import org.estudo.gitHubApi.model.UserGit;
+
 import java.io.IOException;
 
 public interface IGitHubService {
 
-    void findUserByName(final String username) throws IOException, InterruptedException;
+    UserGit findUserByName(final String username) throws IOException, InterruptedException;
 
 }
