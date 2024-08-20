@@ -3,6 +3,7 @@ package org.estudo;
 
 import org.estudo.coinGeckoApi.service.CoinGeckoApiService;
 import org.estudo.coinGeckoApi.service.ICoinGeckoApiService;
+import org.estudo.gitHubApi.exception.ErroConsultaGitHubException;
 import org.estudo.gitHubApi.service.GitHubService;
 import org.estudo.gitHubApi.service.IGitHubService;
 import org.estudo.googleBooksApi.service.GoogleBooksApiService;
@@ -55,7 +56,7 @@ public class Main {
                     case "4":
                         System.out.println("Escreva o nome do usuário do github:\t");
                         final var nomeUsuario = scanner.nextLine();
-                        gitHubService.findUserByName(nomeUsuario);
+                        System.out.println(gitHubService.findUserByName(nomeUsuario));
                         break;
                     case "0":
                         System.out.println("Encerrando aplicação...");
@@ -64,6 +65,8 @@ public class Main {
                         System.out.println("Opção inválida!");
                         break;
                 }
+            } catch (ErroConsultaGitHubException ex) {
+                System.out.println("Erro na consulta ao GitHub: ".concat(ex.getMessage()));
             } catch (IOException | InterruptedException ex) {
                 System.out.println("Erro: ".concat(ex.getMessage()));
             }
