@@ -46,7 +46,10 @@ public class Main {
                         System.out.println("---------------");
                         System.out.println("Escreva o id da coin:\t (conforme /coins/list da documentacao)");
                         final var idMoeda = scanner.nextLine();
-                        System.out.println(coinGeckoApiService.findCoinById(idMoeda).toString());
+                        final var response = coinGeckoApiService.findCoinById(idMoeda);
+                        System.out.println(response.toString());
+                        response.gerarArquivoTxt(idMoeda);
+                        System.out.println("Gerado arquivo".concat(idMoeda));
                         break;
                     case "3":
                         System.out.println("Escreva o nome da receita:\t");
