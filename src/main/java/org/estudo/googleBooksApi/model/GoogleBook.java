@@ -1,5 +1,8 @@
 package org.estudo.googleBooksApi.model;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.estudo.util.IGerarArquivo;
 
 import java.io.FileWriter;
@@ -40,6 +43,20 @@ public record GoogleBook(String totalItems,
             }
 
             System.out.println("Gerado arquivo ".concat(tituloArquivo));
+        } catch (IOException ex) {
+            System.out.println("Erro ao gerar Arquivo: ".concat(ex.getMessage()));
+        }
+    }
+
+    @Override
+    public void gerarArquivoJson(String tituloArquivo) {
+        try (final var fileWriter = new FileWriter(tituloArquivo.concat(".json"))) {
+            final Gson gson = new GsonBuilder()
+                    .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+                    .setPrettyPrinting()
+                    .create();
+
+            fileWriter.write(gson.toJson(this));
         } catch (IOException ex) {
             System.out.println("Erro ao gerar Arquivo: ".concat(ex.getMessage()));
         }
