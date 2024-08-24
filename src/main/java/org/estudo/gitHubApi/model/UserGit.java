@@ -1,8 +1,12 @@
 package org.estudo.gitHubApi.model;
 
 import com.google.gson.annotations.SerializedName;
+import org.estudo.util.IGerarArquivo;
 
-public record UserGit(
+import java.io.FileWriter;
+import java.io.IOException;
+
+public record UserGit (
         String login,
         Integer id,
         @SerializedName("node_id") String nodeId,
@@ -35,4 +39,23 @@ public record UserGit(
         Integer following,
         @SerializedName("created_at") String createdAt,
         @SerializedName("updated_at") String updatedAt
-) {}
+) implements IGerarArquivo {
+
+    @Override
+    public void gerarArquivoTxt(String tituloArquivo) {
+        try (final var fileWriter = new FileWriter("/src/tmp/".concat(tituloArquivo.concat(".txt")))) {
+
+        fileWriter.write("Login: ".concat(this.login)
+                        .concat("Email: ")
+                        .concat(this.email)
+                        .concat("Avatar: ")
+                        .concat(this.avatarUrl)
+                        .concat("Url: ")
+                        .concat(this.url));
+
+        } catch (IOException ex) {
+            System.out.println("Erro ao gerar Arquivo: ".concat(ex.getMessage()));
+        }
+
+    }
+}
