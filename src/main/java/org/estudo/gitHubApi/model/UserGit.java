@@ -53,6 +53,7 @@ public record UserGit (
                         .concat("Url: ")
                         .concat(this.url));
 
+        System.out.println("Gerado arquivo".concat(tituloArquivo));
         } catch (IOException ex) {
             System.out.println("Erro ao gerar Arquivo: ".concat(ex.getMessage()));
         }
