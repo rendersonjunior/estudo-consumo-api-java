@@ -39,17 +39,17 @@ public class Main {
                     case "1":
                         System.out.println("Escreva o nome do livro:\t");
                         final var nomeLivro = scanner.nextLine();
-                        System.out.println(googleBooksApiService.findBookByName(nomeLivro).toString());
+                        final var responseGoogleBooks = googleBooksApiService.findBookByName(nomeLivro);
+                        System.out.println(responseGoogleBooks.toString());
+                        responseGoogleBooks.gerarArquivoTxt(nomeLivro);
                         break;
                     case "2":
                         coinGeckoApiService.findAllCoins();
                         System.out.println("---------------");
                         System.out.println("Escreva o id da coin:\t (conforme /coins/list da documentacao)");
                         final var idMoeda = scanner.nextLine();
-                        final var response = coinGeckoApiService.findCoinById(idMoeda);
-                        System.out.println(response.toString());
-                        response.gerarArquivoTxt(idMoeda);
-                        System.out.println("Gerado arquivo".concat(idMoeda));
+                        final var responseCoinGecko = coinGeckoApiService.findCoinById(idMoeda);
+                        responseCoinGecko.gerarArquivoTxt(idMoeda);
                         break;
                     case "3":
                         System.out.println("Escreva o nome da receita:\t");
@@ -59,7 +59,9 @@ public class Main {
                     case "4":
                         System.out.println("Escreva o nome do usuário do github:\t");
                         final var nomeUsuario = scanner.nextLine();
-                        System.out.println(gitHubService.findUserByName(nomeUsuario));
+                        final var responseGitHub = gitHubService.findUserByName(nomeUsuario);
+                        System.out.println(responseGitHub.toString());
+                        responseGitHub.gerarArquivoTxt(nomeUsuario);
                         break;
                     case "0":
                         System.out.println("Encerrando aplicação...");
