@@ -10,7 +10,7 @@ public record CoinGecko(Map<String, ValorMoeda> moedas) implements IGerarArquivo
 
     @Override
     public void gerarArquivoTxt(String tituloArquivo) {
-        try (final var fileWriter = new FileWriter("/src/tmp/".concat(tituloArquivo.concat(".txt")))) {
+        try (final var fileWriter = new FileWriter(tituloArquivo.concat(".txt"))) {
 
             for (final var moeda : moedas.entrySet()) {
                 fileWriter.write(moeda.getKey().concat("= ".concat(moeda.getValue().toString())));
