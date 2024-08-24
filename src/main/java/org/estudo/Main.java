@@ -49,12 +49,15 @@ public class Main {
                         System.out.println("Escreva o id da coin:\t (conforme /coins/list da documentacao)");
                         final var idMoeda = scanner.nextLine();
                         final var responseCoinGecko = coinGeckoApiService.findCoinById(idMoeda);
+                        System.out.println(responseCoinGecko.toString());
                         responseCoinGecko.gerarArquivoTxt(idMoeda);
                         break;
                     case "3":
                         System.out.println("Escreva o nome da receita:\t");
                         final var nomeReceita = scanner.nextLine();
-                        System.out.println(theMealDBService.findRecipeByName(nomeReceita));
+                        final var responseTheMealDB = theMealDBService.findRecipeByName(nomeReceita);
+                        System.out.println(responseTheMealDB.toString());
+                        responseTheMealDB.gerarArquivoTxt(nomeReceita);
                         break;
                     case "4":
                         System.out.println("Escreva o nome do usuário do github:\t");
