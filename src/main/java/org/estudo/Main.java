@@ -42,6 +42,7 @@ public class Main {
                         final var responseGoogleBooks = googleBooksApiService.findBookByName(nomeLivro);
                         System.out.println(responseGoogleBooks.toString());
                         responseGoogleBooks.gerarArquivoTxt(nomeLivro);
+                        responseGoogleBooks.gerarArquivoJson(nomeLivro);
                         break;
                     case "2":
                         coinGeckoApiService.findAllCoins();
@@ -51,6 +52,7 @@ public class Main {
                         final var responseCoinGecko = coinGeckoApiService.findCoinById(idMoeda);
                         System.out.println(responseCoinGecko.toString());
                         responseCoinGecko.gerarArquivoTxt(idMoeda);
+                        responseCoinGecko.gerarArquivoJson(idMoeda);
                         break;
                     case "3":
                         System.out.println("Escreva o nome da receita:\t");
@@ -58,6 +60,7 @@ public class Main {
                         final var responseTheMealDB = theMealDBService.findRecipeByName(nomeReceita);
                         System.out.println(responseTheMealDB.toString());
                         responseTheMealDB.gerarArquivoTxt(nomeReceita);
+                        responseTheMealDB.gerarArquivoJson(nomeReceita);
                         break;
                     case "4":
                         System.out.println("Escreva o nome do usuário do github:\t");
@@ -65,6 +68,7 @@ public class Main {
                         final var responseGitHub = gitHubService.findUserByName(nomeUsuario);
                         System.out.println(responseGitHub.toString());
                         responseGitHub.gerarArquivoTxt(nomeUsuario);
+                        responseGitHub.gerarArquivoJson(nomeUsuario);
                         break;
                     case "0":
                         System.out.println("Encerrando aplicação...");
