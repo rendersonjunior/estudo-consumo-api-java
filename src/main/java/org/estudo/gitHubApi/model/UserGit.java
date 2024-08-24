@@ -5,8 +5,9 @@ import org.estudo.util.IGerarArquivo;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Optional;
 
-public record UserGit (
+public record UserGit(
         String login,
         Integer id,
         @SerializedName("node_id") String nodeId,
@@ -38,22 +39,23 @@ public record UserGit (
         Integer followers,
         Integer following,
         @SerializedName("created_at") String createdAt,
-        @SerializedName("updated_at") String updatedAt
-) implements IGerarArquivo {
+        @SerializedName("updated_at") String updatedAt) implements IGerarArquivo {
 
     @Override
     public void gerarArquivoTxt(String tituloArquivo) {
-        try (final var fileWriter = new FileWriter("/src/tmp/".concat(tituloArquivo.concat(".txt")))) {
+        try (final var fileWriter = new FileWriter(tituloArquivo.concat(".txt"))) {
 
-        fileWriter.write("Login: ".concat(this.login)
-                        .concat("Email: ")
-                        .concat(this.email)
-                        .concat("Avatar: ")
-                        .concat(this.avatarUrl)
-                        .concat("Url: ")
-                        .concat(this.url));
+            String login = Optional.ofNullable(this.login).orElse("N/A");
+            String email = Optional.ofNullable(this.email).orElse("N/A");
+            String avatarUrl = Optional.ofNullable(this.avatarUrl).orElse("N/A");
+            String url = Optional.ofNullable(this.url).orElse("N/A");
 
-        System.out.println("Gerado arquivo".concat(tituloArquivo));
+            fileWriter.write("Login: ".concat(login)
+                    .concat(" Email: ").concat(email)
+                    .concat(" Avatar: ").concat(avatarUrl)
+                    .concat(" Url: ").concat(url));
+
+            System.out.println("Gerado arquivo".concat(tituloArquivo));
         } catch (IOException ex) {
             System.out.println("Erro ao gerar Arquivo: ".concat(ex.getMessage()));
         }
